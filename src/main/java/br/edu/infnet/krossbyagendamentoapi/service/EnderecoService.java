@@ -9,6 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class EnderecoService {
     public Boolean validarCep(String cep) {
-        return null;
+        return false;
     }
 }

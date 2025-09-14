@@ -12,9 +12,9 @@ public class GeralUtils {
     private static final Pattern SOMENTE_LETRAS = Pattern.compile("^[\\p{L}\\s]+$");
 
     public static Boolean contemNumeros(String campo) {
-        return null;
+        return false;
     }
     public static Boolean contemLetras(String campo) {
-        return null;
+        return false;
     }
 }
