@@ -19,11 +19,15 @@ class EnderecoServiceTest {
     @Test
     @DisplayName("Teste validar CEP deve lançar BusinessException deve conter somente números")
     void validarCepDeveLançarExceptionSomenteNumerosTest() {
-        assertThrows(BusinessException.class, () -> service.validarCep("8302533A"));
+        assertThrows(BusinessException.class, () -> service.validarCep("8302533A"), "deve lançar BusinessException");
+        BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCep("8302533A"));
+        assertEquals("CEP deve conter somente números", businessException.getMessage(), "deve retornar mensagem correta");
     }
     @Test
     @DisplayName("Teste validar CEP deve lançar BusinessException deve conter 8 digitos")
     void validarCepDeveLançarExceptionDeveConter8digitosTest() {
-        assertThrows(BusinessException.class, () -> service.validarCep("8302"));
+        assertThrows(BusinessException.class, () -> service.validarCep("8302"), "deve lançar BusinessException");
+        BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCep("8302"));
+        assertEquals("CEP deve conter 8 digitos", businessException.getMessage(), "deve retornar mensagem correta");
     }
 }
