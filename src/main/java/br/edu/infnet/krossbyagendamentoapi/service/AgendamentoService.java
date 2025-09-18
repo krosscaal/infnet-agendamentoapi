@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class AgendamentoService {
     public Boolean validarNome(String nome) {
-        return false;
+        return null;
     }
     public Boolean validarSobrenome(String sobrenome) {
-        return false;
+        return null;
     }
     public Boolean validarCpf(String cpf) {
-        return false;
+        return null;
     }
 }
