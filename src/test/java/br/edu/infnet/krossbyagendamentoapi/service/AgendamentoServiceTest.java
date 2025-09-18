@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 class AgendamentoServiceTest {
@@ -30,10 +29,12 @@ class AgendamentoServiceTest {
         assertTrue(service.validarNome(agendamento.getNome()), "ao validar nome deve retornar true");
     }
     @Test
-    @DisplayName("Teste ao validar nome deve lançar Businnes Exception")
+    @DisplayName("Teste ao validar nome deve lançar BusinessException")
     void validarNomeDeveLancarBusinnessExceptionTest() {
         agendamento.setNome("#Krossby$");
-        assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
+        assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
+        BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
+        assertTrue(businessException.getMessage().contains("deve conter apenas letras"), "deve retornar mensagem correta");
     }
 
     @Test
@@ -43,10 +44,12 @@ class AgendamentoServiceTest {
         assertTrue(service.validarSobrenome(agendamento.getSobrenome()), "ao validar sobrenome deve retornar true");
     }
     @Test
-    @DisplayName("Teste ao validar sobrenome deve lançar Businnes Exception")
+    @DisplayName("Teste ao validar sobrenome deve lançar BusinesException")
     void validarSobreNomeDeveLancarBusinnessExceptionTest() {
         agendamento.setSobrenome("Carvalh$ Co$ta");
-        assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
+        assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
+        BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
+        assertTrue(businessException.getMessage().contains("deve conter apenas letras"), "deve retornar mensagem correta");
     }
 
     @Test
@@ -56,16 +59,20 @@ class AgendamentoServiceTest {
         assertTrue(service.validarCpf(agendamento.getCpf()), "ao validar cpf deve retornar true");
     }
     @Test
-    @DisplayName("Teste validar CPF deve lançar Business Exception por não conter 11 digitos")
+    @DisplayName("Teste validar CPF deve lançar BusinessException por não conter 11 digitos")
     void validarCpfDeveLancarBusinnessExceptionPorNaoConter11DigitosTest() {
         agendamento.setCpf("243");
-        assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()));
+        assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()), "deve lançar BusinessException");
+        BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()));
+        assertEquals("deve conter 11 digitos", businessException.getMessage(), "deve retornar mensagem correta");
     }
     @Test
     @DisplayName("Teste validar CPF deve lançar Business Exception por não ser número válido")
     void validarCpfContem11DigitosTest() {
         agendamento.setCpf("24343829080");
-        assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()));
+        assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()), "deve lançar BusinessException");
+        BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()));
+        assertEquals("número CPF é invalido", businessException.getMessage(), "deve retornar mensagem correta");
     }
 
 }
