@@ -8,12 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Locale;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 class AgendamentoServiceTest {
 
-    private AgendamentoService service = new AgendamentoService();
+    private final AgendamentoService service = new AgendamentoService();
     private Agendamento agendamento;
 
 
@@ -25,16 +27,40 @@ class AgendamentoServiceTest {
     @Test
     @DisplayName("Teste validar nome deve conter somente letras")
     void validarNomeTest() {
-        agendamento.setNome("Krossby");
+        agendamento.setNome("Krossby A Costa");
         assertTrue(service.validarNome(agendamento.getNome()), "ao validar nome deve retornar true");
     }
     @Test
-    @DisplayName("Teste ao validar nome deve lançar BusinessException")
+    @DisplayName("Teste ao validar nome deve lançar BusinessException por ser alfanumérico")
     void validarNomeDeveLancarBusinnessExceptionTest() {
         agendamento.setNome("#Krossby$");
         assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
         assertTrue(businessException.getMessage().contains("deve conter apenas letras"), "deve retornar mensagem correta");
+    }
+    @Test
+    @DisplayName("Teste ao validar nome deve lançar BusinessException por conter mais de um espaçamento entre letras")
+    void validarNomeDeveLancarBusinnessExceptionMaisdeUmEspacamentoTest() {
+        agendamento.setNome("Krossby       A    C");
+        assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
+        BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
+        assertEquals("somente é permitido um espaçamento para separação entre letras", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
+    }
+    @Test
+    @DisplayName("Teste ao validar nome deve lançar BusinessException por ser null")
+    void validarNomeDeveLancarBusinnessExceptionNullTest() {
+        agendamento.setNome(null);
+        assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
+        BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
+        assertEquals("nome não pode ser nulo", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
+    }
+    @Test
+    @DisplayName("Teste ao validar nome deve lançar BusinessException por ser vazio")
+    void validarNomeDeveLancarBusinnessExceptionVazioTest() {
+        agendamento.setNome("");
+        assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
+        BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
+        assertTrue(businessException.getMessage().contains("nome não pode ser vazio"), "deve retornar mensagem correta");
     }
 
     @Test
@@ -44,12 +70,38 @@ class AgendamentoServiceTest {
         assertTrue(service.validarSobrenome(agendamento.getSobrenome()), "ao validar sobrenome deve retornar true");
     }
     @Test
-    @DisplayName("Teste ao validar sobrenome deve lançar BusinesException")
+    @DisplayName("Teste ao validar sobrenome deve lançar BusinesException por ser alfanumérico")
     void validarSobreNomeDeveLancarBusinnessExceptionTest() {
         agendamento.setSobrenome("Carvalh$ Co$ta");
         assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
         assertTrue(businessException.getMessage().contains("deve conter apenas letras"), "deve retornar mensagem correta");
+    }
+    @Test
+    @DisplayName("Teste ao validar sobrenome deve lançar BusinesException com mais de um espaçamento para separação entre letras")
+    void validarSobreNomeDeveLancarBusinnessExceptionEspacamentoTest() {
+        agendamento.setSobrenome("Carvalho    Costa    A");
+        assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
+        BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
+        assertTrue(businessException.getMessage().contains("somente é permitido um espaçamento para separação entre letras"), "deve retornar mensagem correta");
+    }
+
+    @Test
+    @DisplayName("Teste ao validar sobrenome deve lançar BusinesException por ser null")
+    void validarSobreNomeDeveLancarBusinnessNullTest() {
+        agendamento.setSobrenome(null);
+        assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
+        BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
+        assertEquals("sobrenome não pode ser nulo", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
+    }
+
+    @Test
+    @DisplayName("Teste ao validar sobrenome deve lançar BusinesException por ser vazio")
+    void validarSobreNomeDeveLancarBusinnessVazioTest() {
+        agendamento.setSobrenome("");
+        assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
+        BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
+        assertEquals("sobrenome não pode ser vazio", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
     }
 
     @Test
@@ -67,12 +119,20 @@ class AgendamentoServiceTest {
         assertEquals("deve conter 11 digitos", businessException.getMessage(), "deve retornar mensagem correta");
     }
     @Test
-    @DisplayName("Teste validar CPF deve lançar Business Exception por não ser número válido")
+    @DisplayName("Teste validar CPF deve lançar BusinessException por não ser número válido")
     void validarCpfContem11DigitosTest() {
         agendamento.setCpf("24343829080");
         assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()));
         assertEquals("número CPF é invalido", businessException.getMessage(), "deve retornar mensagem correta");
+    }
+    @Test
+    @DisplayName("Teste validar CPF deve lançar BusinessException por ser nulo")
+    void validarCpfNullTest() {
+        agendamento.setCpf(null);
+        assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()), "deve lançar BusinessException");
+        BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()));
+        assertEquals("cpf não pode ser nulo", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
     }
 
 }
