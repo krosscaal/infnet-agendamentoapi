@@ -42,11 +42,25 @@ class GeralUtilsTest {
     @Test
     @DisplayName("Teste verificar número CPF valido deve retornar true")
     void verificarNumeroCpfValidoDeveRetornarTrueTest() {
-        assertTrue(GeralUtils.VerificarNumeroCpfValido("91716788080"), "deve retornar true");
+        assertTrue(GeralUtils.verificarNumeroCpfValido("52998224725"), "deve retornar true");
     }
     @Test
     @DisplayName("Teste verificar número CPF valido deve retornar false")
     void verificarNumeroCpfValidoDeveRetornarFalseTest() {
-        assertFalse(GeralUtils.VerificarNumeroCpfValido("91716788080"), "deve retornar false");
+        assertFalse(GeralUtils.verificarNumeroCpfValido("52998224722"), "deve retornar false");
+    }
+    @Test
+    @DisplayName("Teste verificar número CPF deve retornar false quando cpf for uma seguencia repetida do mesmo digito como 11111111111")
+    void verificarNumeroCpfDeveRetornarFalseQuandoCpfForSequenciaRepetidaTest() {
+        assertFalse(GeralUtils.verificarNumeroCpfValido("11111111111"), "deve retornar false");
+        assertFalse(GeralUtils.verificarNumeroCpfValido("22222222222"), "deve retornar false");
+        assertFalse(GeralUtils.verificarNumeroCpfValido("33333333333"), "deve retornar false");
+        assertFalse(GeralUtils.verificarNumeroCpfValido("44444444444"), "deve retornar false");
+        assertFalse(GeralUtils.verificarNumeroCpfValido("55555555555"), "deve retornar false");
+        assertFalse(GeralUtils.verificarNumeroCpfValido("66666666666"), "deve retornar false");
+        assertFalse(GeralUtils.verificarNumeroCpfValido("77777777777"), "deve retornar false");
+        assertFalse(GeralUtils.verificarNumeroCpfValido("88888888888"), "deve retornar false");
+        assertFalse(GeralUtils.verificarNumeroCpfValido("99999999999"), "deve retornar false");
+        assertFalse(GeralUtils.verificarNumeroCpfValido("00000000000"), "deve retornar false");
     }
 }
