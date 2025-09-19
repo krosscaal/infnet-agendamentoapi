@@ -8,6 +8,9 @@ import br.edu.infnet.krossbyagendamentoapi.exception.BusinessException;
 import br.edu.infnet.krossbyagendamentoapi.utils.GeralUtils;
 import org.springframework.stereotype.Service;
 
+import static br.edu.infnet.krossbyagendamentoapi.utils.MensagemCenter.SOMENTE_NUMEROS;
+
+
 @Service
 public class EnderecoService {
     public Boolean validarCep(String cep) {
@@ -18,7 +21,7 @@ public class EnderecoService {
             throw new BusinessException("cep deve conter 8 digitos");
         }
         if (GeralUtils.contemNumeros(cep).equals(Boolean.FALSE)) {
-            throw new BusinessException("cep deve conter somente números");
+            throw new BusinessException("cep ".concat(SOMENTE_NUMEROS));
         }
         return true;
     }

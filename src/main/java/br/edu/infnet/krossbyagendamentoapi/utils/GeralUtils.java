@@ -10,7 +10,6 @@ public class GeralUtils {
     private GeralUtils() {}
     private static final Pattern SOMENTE_NUMEROS = Pattern.compile("^\\d+$");
     private static final Pattern SOMENTE_LETRAS = Pattern.compile("^[\\p{L}\\s]+$");
-    private static final Pattern SOMENTE_LETRAS_COM_UM_ESPACAMENTO = Pattern.compile("^[\\p{L}]+(?: [\\p{L}]+)*$");
 
 
     public static Boolean contemNumeros(String campo) {
@@ -24,12 +23,6 @@ public class GeralUtils {
             return false;
         }
         return SOMENTE_LETRAS.matcher(campo).matches();
-    }
-    public static Boolean contemLetrasComUmEspacamento(String campo) {
-        if (campo == null || campo.trim().isEmpty()) {
-            return false;
-        }
-        return SOMENTE_LETRAS_COM_UM_ESPACAMENTO.matcher(campo).matches();
     }
     public static Boolean verificarNumeroCpfValido(String cpf) {
         if (cpf == null || cpf.trim().length() != 11) {

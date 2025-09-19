@@ -8,6 +8,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Locale;
 
+import static br.edu.infnet.krossbyagendamentoapi.utils.MensagemCenter.SOMENTE_NUMEROS;
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 class EnderecoServiceTest {
@@ -24,7 +25,7 @@ class EnderecoServiceTest {
     void validarCepDeveLançarExceptionSomenteNumerosTest() {
         assertThrows(BusinessException.class, () -> service.validarCep("8302533A"), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCep("8302533A"));
-        assertEquals("cep deve conter somente números", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
+        assertEquals("cep ".concat(SOMENTE_NUMEROS), businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
     }
 
     @Test
