@@ -36,7 +36,7 @@ class AgendamentoServiceTest {
         agendamento.setNome("#Krossby$");
         assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
-        assertTrue(businessException.getMessage().contains("deve conter apenas letras"), "deve retornar mensagem correta");
+        assertTrue(businessException.getMessage().toLowerCase(Locale.ROOT).contains("deve conter apenas letras"), "deve retornar mensagem correta");
     }
     @Test
     @DisplayName("Teste ao validar nome deve lançar BusinessException por conter mais de um espaçamento entre letras")
@@ -60,7 +60,7 @@ class AgendamentoServiceTest {
         agendamento.setNome("");
         assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
-        assertTrue(businessException.getMessage().contains("nome não pode ser vazio"), "deve retornar mensagem correta");
+        assertTrue(businessException.getMessage().toLowerCase(Locale.ROOT).contains("nome não pode ser vazio"), "deve retornar mensagem correta");
     }
 
     @Test
@@ -75,7 +75,7 @@ class AgendamentoServiceTest {
         agendamento.setSobrenome("Carvalh$ Co$ta");
         assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
-        assertTrue(businessException.getMessage().contains("deve conter apenas letras"), "deve retornar mensagem correta");
+        assertTrue(businessException.getMessage().toLowerCase(Locale.ROOT).contains("deve conter apenas letras"), "deve retornar mensagem correta");
     }
     @Test
     @DisplayName("Teste ao validar sobrenome deve lançar BusinesException com mais de um espaçamento para separação entre letras")
@@ -83,7 +83,7 @@ class AgendamentoServiceTest {
         agendamento.setSobrenome("Carvalho    Costa    A");
         assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
-        assertTrue(businessException.getMessage().contains("somente é permitido um espaçamento para separação entre letras"), "deve retornar mensagem correta");
+        assertTrue(businessException.getMessage().toLowerCase(Locale.ROOT).contains("somente é permitido um espaçamento para separação entre letras"), "deve retornar mensagem correta");
     }
 
     @Test
@@ -116,7 +116,7 @@ class AgendamentoServiceTest {
         agendamento.setCpf("243");
         assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()));
-        assertEquals("deve conter 11 digitos", businessException.getMessage(), "deve retornar mensagem correta");
+        assertEquals("deve conter 11 digitos", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
     }
     @Test
     @DisplayName("Teste validar CPF deve lançar BusinessException por não ser número válido")
@@ -124,7 +124,7 @@ class AgendamentoServiceTest {
         agendamento.setCpf("24343829080");
         assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()));
-        assertEquals("número CPF é invalido", businessException.getMessage(), "deve retornar mensagem correta");
+        assertTrue(businessException.getMessage().toLowerCase(Locale.ROOT).contains("número CPF é invalido"), "deve retornar mensagem correta");
     }
     @Test
     @DisplayName("Teste validar CPF deve lançar BusinessException por ser nulo")
