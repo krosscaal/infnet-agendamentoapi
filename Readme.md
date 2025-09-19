@@ -15,12 +15,12 @@ solução completa de controle de acesso.
 
 ## Objetivo
 
-    Objetivo deste sistema e facilitar ao morador do condomínio o agendamento de visitas, 
-    para ter agilizar no momento das visitas chegarem na portaria e evitar o tempo gasto 
-    com cadastro no procedimento normal de registro de acessos ao condomínio.
+    Objetivo do sistema e facilitar ao morador do condomínio o agendamento de visitas, 
+    para agilizar no momento do visitante chegar na portaria com o cadastro e evitar tempo gasto 
+    com procedimento de registro de acessos ao condomínio.
 
     Para isso o morador devera informar ao sistema de agendamento os dados do visitante sendo estes 
-    por questoes de segurança obrigatórios:
+    por questões de segurança obrigatórios:
     - nome (obrigatório)
     - Sobrenome (obrigatório)
     - CPF (obrigatório)
