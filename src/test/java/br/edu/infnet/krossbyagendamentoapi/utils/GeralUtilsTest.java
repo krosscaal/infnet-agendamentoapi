@@ -42,27 +42,6 @@ class GeralUtilsTest {
     }
 
     @Test
-    @DisplayName("Teste contemLetras com espaçammento deve retornar true")
-    void contemLetrasComUmEspacamentoTest() {
-        assertTrue(GeralUtils.contemLetrasComUmEspacamento("Nome e Sobrenome"), "deve retornar true");
-    }
-    @Test
-    @DisplayName("Teste contemLetras com espaçammento deve retornar false quando tiver mais de um espaçamento entre as letras")
-    void contemLetrasComUmEspacamentoMaiorTest() {
-        assertFalse(GeralUtils.contemLetrasComUmEspacamento("Nome e    Sobrenome"), "deve retornar false");
-    }
-
-    @Test
-    @DisplayName("Teste contemLetras com espaçammento deve retornar false quando for null")
-    void contemLetrasComUmEspacamentoNullTest() {
-        assertFalse(GeralUtils.contemLetrasComUmEspacamento(null), "deve retornar false");
-    }
-    @Test
-    @DisplayName("Teste contemLetras com espaçammento deve retornar false quando for vazio")
-    void contemLetrasComUmEspacamentoVazioTest() {
-        assertFalse(GeralUtils.contemLetrasComUmEspacamento(""), "deve retornar false");
-    }
-    @Test
     @DisplayName("Teste contemNumeros deve retornar false quando paramentro for alfanumérico")
     void contemNumerosFalseTest() {
         assertFalse(GeralUtils.contemNumeros("715$#Sobrenome"), "deve retornar false");

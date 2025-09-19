@@ -10,6 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Locale;
 
+import static br.edu.infnet.krossbyagendamentoapi.utils.MensagemCenter.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -34,25 +35,22 @@ class AgendamentoServiceTest {
     @DisplayName("Teste ao validar nome deve lançar BusinessException por ser alfanumérico")
     void validarNomeDeveLancarBusinnessExceptionTest() {
         agendamento.setNome("#Krossby$");
-        assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
-        assertTrue(businessException.getMessage().toLowerCase(Locale.ROOT).contains("deve conter apenas letras"), "deve retornar mensagem correta");
+        assertTrue(businessException.getMessage().toLowerCase(Locale.ROOT).contains(SOMENTE_LETRAS), "deve retornar mensagem correta");
     }
     @Test
     @DisplayName("Teste ao validar nome deve lançar BusinessException por ser null")
     void validarNomeDeveLancarBusinnessExceptionNullTest() {
         agendamento.setNome(null);
-        assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
-        assertEquals("nome não pode ser nulo", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
+        assertEquals("nome ".concat(NAO_NULO), businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
     }
     @Test
     @DisplayName("Teste ao validar nome deve lançar BusinessException por ser vazio")
     void validarNomeDeveLancarBusinnessExceptionVazioTest() {
         agendamento.setNome("");
-        assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarNome(agendamento.getNome()));
-        assertTrue(businessException.getMessage().toLowerCase(Locale.ROOT).contains("nome não pode ser vazio"), "deve retornar mensagem correta");
+        assertTrue(businessException.getMessage().toLowerCase(Locale.ROOT).contains("nome ".concat(NAO_VAZIO)), "deve retornar mensagem correta");
     }
 
     @Test
@@ -65,26 +63,23 @@ class AgendamentoServiceTest {
     @DisplayName("Teste ao validar sobrenome deve lançar BusinesException por ser alfanumérico")
     void validarSobreNomeDeveLancarBusinnessExceptionTest() {
         agendamento.setSobrenome("Carvalh$ Co$ta");
-        assertThrows(BusinessException.class, () -> service.validarSobrenome(agendamento.getNome()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarSobrenome(agendamento.getSobrenome()));
-        assertTrue(businessException.getMessage().toLowerCase(Locale.ROOT).contains("deve conter apenas letras"), "deve retornar mensagem correta");
+        assertTrue(businessException.getMessage().toLowerCase(Locale.ROOT).contains(SOMENTE_LETRAS), "deve retornar mensagem correta");
     }
     @Test
     @DisplayName("Teste ao validar sobrenome deve lançar BusinesException por ser null")
     void validarSobreNomeDeveLancarBusinnessNullTest() {
         agendamento.setSobrenome(null);
-        assertThrows(BusinessException.class, () -> service.validarSobrenome(agendamento.getNome()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarSobrenome(agendamento.getSobrenome()));
-        assertEquals("sobrenome não pode ser nulo", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
+        assertEquals("sobrenome ".concat(NAO_NULO), businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
     }
 
     @Test
     @DisplayName("Teste ao validar sobrenome deve lançar BusinesException por ser vazio")
     void validarSobreNomeDeveLancarBusinnessVazioTest() {
         agendamento.setSobrenome("");
-        assertThrows(BusinessException.class, () -> service.validarSobrenome(agendamento.getNome()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarSobrenome(agendamento.getSobrenome()));
-        assertEquals("sobrenome não pode ser vazio", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
+        assertEquals("sobrenome ".concat(NAO_VAZIO), businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
     }
 
     @Test
@@ -97,7 +92,6 @@ class AgendamentoServiceTest {
     @DisplayName("Teste validar CPF deve lançar BusinessException por não conter 11 digitos")
     void validarCpfDeveLancarBusinnessExceptionPorNaoConter11DigitosTest() {
         agendamento.setCpf("243");
-        assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()));
         assertEquals("deve conter 11 digitos", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
     }
@@ -105,7 +99,6 @@ class AgendamentoServiceTest {
     @DisplayName("Teste validar CPF deve lançar BusinessException por não ser número válido")
     void validarCpfContem11DigitosTest() {
         agendamento.setCpf("24343829080");
-        assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()));
         assertTrue(businessException.getMessage().toLowerCase(Locale.ROOT).contains("número cpf é invalido"), "deve retornar mensagem correta");
     }
@@ -113,9 +106,8 @@ class AgendamentoServiceTest {
     @DisplayName("Teste validar CPF deve lançar BusinessException por ser nulo")
     void validarCpfNullTest() {
         agendamento.setCpf(null);
-        assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()));
-        assertEquals("cpf não pode ser nulo", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
+        assertEquals("cpf ".concat(NAO_NULO), businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
     }
 
 }
