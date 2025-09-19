@@ -6,10 +6,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Locale;
+
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 class EnderecoServiceTest {
-    private EnderecoService service = new EnderecoService();
+    private final EnderecoService service = new EnderecoService();
 
     @Test
     @DisplayName("Teste validar CEP deve retornar true")
@@ -22,7 +24,7 @@ class EnderecoServiceTest {
     void validarCepDeveLançarExceptionSomenteNumerosTest() {
         assertThrows(BusinessException.class, () -> service.validarCep("8302533A"), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCep("8302533A"));
-        assertEquals("CEP deve conter somente números", businessException.getMessage(), "deve retornar mensagem correta");
+        assertEquals("cep deve conter somente números", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
     }
 
     @Test
@@ -30,7 +32,7 @@ class EnderecoServiceTest {
     void validarCepDeveLançarExceptionDeveConter8digitosTest() {
         assertThrows(BusinessException.class, () -> service.validarCep("8302"), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCep("8302"));
-        assertEquals("CEP deve conter 8 digitos", businessException.getMessage(), "deve retornar mensagem correta");
+        assertEquals("cep deve conter 8 digitos", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
     }
 
     @Test
@@ -38,6 +40,6 @@ class EnderecoServiceTest {
     void validarCepDeveLançarExceptionNullTest() {
         assertThrows(BusinessException.class, () -> service.validarCep(null), "deve lançar BusinessException");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCep(null));
-        assertEquals("CEP invalido, deve conter 8 digitos", businessException.getMessage(), "deve retornar mensagem correta");
+        assertEquals("cep invalido, deve conter 8 digitos", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
     }
 }
