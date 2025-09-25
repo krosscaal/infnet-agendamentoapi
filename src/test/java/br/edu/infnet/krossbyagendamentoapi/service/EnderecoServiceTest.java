@@ -4,6 +4,7 @@ import br.edu.infnet.krossbyagendamentoapi.exception.BusinessException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Locale;
@@ -12,7 +13,8 @@ import static br.edu.infnet.krossbyagendamentoapi.utils.MensagemCenter.SOMENTE_N
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 class EnderecoServiceTest {
-    private final EnderecoService service = new EnderecoService();
+    @InjectMocks
+    private EnderecoService service;
 
     @Test
     @DisplayName("Teste validar CEP deve retornar true")

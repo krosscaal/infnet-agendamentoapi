@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Locale;
@@ -15,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 class AgendamentoServiceTest {
-
-    private final AgendamentoService service = new AgendamentoService();
+    @InjectMocks
+    private AgendamentoService service;
     private Agendamento agendamento;
 
 
@@ -93,7 +94,7 @@ class AgendamentoServiceTest {
     void validarCpfDeveLancarBusinnessExceptionPorNaoConter11DigitosTest() {
         agendamento.setCpf("243");
         BusinessException businessException = assertThrows(BusinessException.class, () -> service.validarCpf(agendamento.getCpf()));
-        assertEquals("deve conter 11 digitos", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
+        assertEquals("cpf deve conter 11 digitos", businessException.getMessage().toLowerCase(Locale.ROOT), "deve retornar mensagem correta");
     }
     @Test
     @DisplayName("Teste validar CPF deve lançar BusinessException por não ser número válido")

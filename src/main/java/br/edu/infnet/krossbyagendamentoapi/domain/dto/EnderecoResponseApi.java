@@ -2,10 +2,9 @@
  * Author: Krossby Adhemar Camacho Alviz
  * owned by Krossft.
  */
-package br.edu.infnet.krossbyagendamentoapi.domain.entity;
+package br.edu.infnet.krossbyagendamentoapi.domain.dto;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,8 +14,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Embeddable
-public class Endereco {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class EnderecoResponseApi {
     private String cep;
     private String logradouro;
     private String numero;
@@ -25,10 +24,16 @@ public class Endereco {
     private String localidade;
     private String estado;
     private String uf;
+    private String ibge;
+    private String gia;
+    private String ddd;
+    private String siafi;
+    private String regiao;
+
 
     @Override
     public String toString() {
-        return "Endereco{" +
+        return "EnderecoResponseApi{" +
                 "cep='" + cep + '\'' +
                 ", logradouro='" + logradouro + '\'' +
                 ", numero='" + numero + '\'' +
@@ -37,6 +42,11 @@ public class Endereco {
                 ", localidade='" + localidade + '\'' +
                 ", estado='" + estado + '\'' +
                 ", uf='" + uf + '\'' +
+                ", ibge='" + ibge + '\'' +
+                ", gia='" + gia + '\'' +
+                ", ddd='" + ddd + '\'' +
+                ", siafi='" + siafi + '\'' +
+                ", regiao='" + regiao + '\'' +
                 '}';
     }
 }

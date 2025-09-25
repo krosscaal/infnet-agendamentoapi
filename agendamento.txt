@@ -1,0 +1,9 @@
+Usuário A;Usuário sobrenome A;67525798060;83025334;2;2;2025-09-29;a partir das 14:00 horas
+Usuário B;Usuário sobrenome B;80041060059;83025336;2;2;2025-09-29;-
+Usuário C;Usuário sobrenome C;42902561040;83025337;1;1;2025-09-28;-
+Usuário D;Usuário sobrenome D;56930080020;83025338;1;1;2025-09-28;-
+Usuário E;Usuário sobrenome E;79327133072;83025330;1;1;2025-09-28;-
+Usuário F;Usuário sobrenome F;25309709045;83025200;2;2;2025-09-29;ENTRAR EM CONTATO COM PROPIETARIO
+Usuário H;Usuário sobrenome H;65766562039;83025333;2;2;2025-09-29;-
+Usuário I;Usuário sobrenome I;24036969000;83025335;3;3;2025-09-29;-
+Usuário J;Usuário sobrenome J;24036969005;83025335;3;3;2025-09-29;-

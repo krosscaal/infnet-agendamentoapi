@@ -4,80 +4,46 @@
  */
 package br.edu.infnet.krossbyagendamentoapi.domain.entity;
 
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
-public class Agendamento {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "tb_agendamento")
+public class Agendamento extends EntidadeBase{
     private String nome;
     private String sobrenome;
     private String cpf;
+    @Embedded
     private Endereco endereco;
     private Long unidadeDaVisita;
     private Long idMoradorSolicitante;
     private LocalDate dataVisita;
     private String observacao;
 
-    public String getNome() {
-        return nome;
-    }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    public Long getUnidadeDaVisita() {
-        return unidadeDaVisita;
-    }
-
-    public void setUnidadeDaVisita(Long unidadeDaVisita) {
-        this.unidadeDaVisita = unidadeDaVisita;
-    }
-
-    public Long getIdMoradorSolicitante() {
-        return idMoradorSolicitante;
-    }
-
-    public void setIdMoradorSolicitante(Long idMoradorSolicitante) {
-        this.idMoradorSolicitante = idMoradorSolicitante;
-    }
-
-    public LocalDate getDataVisita() {
-        return dataVisita;
-    }
-
-    public void setDataVisita(LocalDate dataVisita) {
-        this.dataVisita = dataVisita;
-    }
-
-    public String getObservacao() {
-        return observacao;
-    }
-
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
+    @Override
+    public String toString() {
+        return "Agendamento{" +
+                "nome='" + nome + '\'' +
+                ", sobrenome='" + sobrenome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", endereco=" + endereco.toString() +
+                ", unidadeDaVisita=" + unidadeDaVisita +
+                ", idMoradorSolicitante=" + idMoradorSolicitante +
+                ", dataVisita=" + dataVisita +
+                ", observacao='" + observacao + '\'' +
+                '}';
     }
 
 }
