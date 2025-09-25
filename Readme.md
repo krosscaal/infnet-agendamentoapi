@@ -1,3 +1,6 @@
+## Autor
+    Krossby Krossft
+
 # Sistema de Agendamento de Visitas ao Condomínio
 
 Sistema para gerenciamento de agendamento de visitas em condomínios, desenvolvido como parte da disciplina de
@@ -70,4 +73,35 @@ solução completa de controle de acesso.
     - ciclo TDD red-green-refactor para os services de Agendamento e Endereco assim como para 
         a classe de utilidades. 
     - pode ser acompanhado a traves dos Pull Requests deste projeto.
+
+## Feature 2:
+
+    Como citado acima no Objetivo, este sistema tem como finalidade o registro de agendamentos que
+    posteriormente seriam solicitados via API pela aplicaçao:   
+  [Sistema de Gestão de Portaria](https://github.com/krosscaal/infnet-sgp)
+
+    - Foram adicionadas propiedades ao pom para uso do FeignClient.
+      foi definido no aplications.properties para uso do FeignClient. as respecitvas urls, assim como
+      uso de banco em memoria.
+
+    Um agendamento deve possuir nome, sobrenome, cpf, cep e data de visita, unidade da visita como 
+    principais dados.
+    
+    O sistema irá validar nome, sobrenome, cpf e cep.
+    O sistema fara consulta a traves do FeignClient para duas Api externas que
+    fornecem o cep:
+    - hhttps://opencep.com/
+    - https://viacep.com.br/
+
+    O sistema fara consulta em ambas Apis, caso alguma retorne um resultado de erro.
+
+    tendo resposta da Api serão persistidos os dados no banco.
+
+    - Foi implementado as camada de controller e repository para Agendamento.
+    - Foi implementado um AbastractConverter para converter os objetoResponse da Api para Endereco.
+    - Foi implementado no service de Agendamento o tratemento da persistencia e de busca de agendamentos
+      por data que a primeira aplicação fara uso via API exposta na camanda de controller.
+    - Foi implementado no service de Endereco a busca do cep via Api externa assim como a conversão do
+      response da Api para Endereco.
+    - Foi feitas alterações nos testes para que continuem funcionando.
 
