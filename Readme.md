@@ -104,9 +104,15 @@ solução completa de controle de acesso.
     - Foi implementado no service de Endereco a busca do cep via Api externa assim como a conversão do
       response da Api para Endereco.
     - Foi feitas alterações nos testes para que continuem funcionando.
+    - Foi implementando um Loader que carrega de um arquivo de texo dados que seriam
+      os agendamentos de visita que ao levantar sistema o AgendamentoLoader sera executado.
+
     - Foi implementada na aplicação
 [Sistema de Gestão de Portaria](https://github.com/krosscaal/infnet-sgp)
 
-      as alterações para integrar-se com este sistema, assim como criado um Job que a cada 10 segundos
-      faz a consulta via Api com esta aplicação sobre os agendamentos para o dia.
+      as alterações para integrar-se com este sistema, 
+      assim como a implementação de um JOB que a cada 10 segundos
+      faz a consulta via Api com esta aplicação sobre os agendamentos
+      para o data programada no job 29-09-2025. somente para teste da
+      comunicação entre as duas aplicações.
 
