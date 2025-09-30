@@ -3,8 +3,10 @@
 
 # Sistema de Agendamento de Visitas ao Condomínio
 
-Sistema para gerenciamento de agendamento de visitas em condomínios, desenvolvido como parte da disciplina de
-Arquiteturas Avançadas de Software com Microsserviços e Spring Framework.
+    Projeto da materia Arquiteturas Avançadas de Software com Microsserviços e SpringFramework[25E3_3]
+
+    Sistema para gerenciamento de agendamento de visitas em condomínios, desenvolvido como parte da disciplina de
+    Arquiteturas Avançadas de Software com Microsserviços e Spring Framework.
 
 ## Tecnologias Utilizadas
 
